@@ -1,6 +1,6 @@
 /**
  * UĞUR RENTACAR - PROFIL MƏNTİQİ
- * İstifadəçi profilinin idarə edilməsi (Yenilənmiş Versiya)
+ * Tam təkmilləşdirilmiş və şəkil problemi həll edilmiş versiya
  */
 
 class ProfileManager {
@@ -11,6 +11,7 @@ class ProfileManager {
     }
     
     async init() {
+        // Supabase sessiyasını yoxla
         const { data: { session } } = await supabaseClient.auth.getSession();
         
         if (!session) {
@@ -19,9 +20,14 @@ class ProfileManager {
         }
         
         this.currentUser = session.user;
+        
+        // Məlumatları yüklə
         await this.loadProfile();
+        
+        // Event listener-ləri qoş
         this.attachEventListeners();
         
+        // Çıxış düyməsi
         const logoutBtn = document.getElementById('logout-btn');
         if (logoutBtn) {
             logoutBtn.addEventListener('click', () => this.logout());
@@ -48,7 +54,7 @@ class ProfileManager {
     }
     
     populateForm(data) {
-        const fields = ['first_name', 'last_name', 'email', 'address', 'city', 'bio', 'phone'];
+        const fields = ['first_name', 'last_name', 'email', 'address', 'city', 'bio'];
         
         fields.forEach(field => {
             const input = document.getElementById(field);
@@ -57,16 +63,18 @@ class ProfileManager {
             }
         });
         
+        // Telefon nömrəsini göstər (Auth-dan və ya profildən)
         const phoneInput = document.getElementById('phone');
         if (phoneInput) {
-            phoneInput.readOnly = true;
-            phoneInput.classList.add('readonly');
+            phoneInput.value = data.phone || this.currentUser.phone || '';
         }
         
+        // Şəkli göstər
         if (data.avatar_url) {
             this.displayAvatar(data.avatar_url);
         }
         
+        // Qeydiyyat tarixi
         const regDateEl = document.getElementById('registration-date');
         if (regDateEl && data.created_at) {
             const date = new Date(data.created_at);
@@ -78,11 +86,17 @@ class ProfileManager {
         const avatarImg = document.getElementById('avatar-preview');
         const avatarPlaceholder = document.getElementById('avatar-placeholder');
         
-        if (avatarImg) {
-            // Şəklin linkinin sonuna timestamp əlavə edirik ki, brauzer keşindən (cache) köhnə şəkli göstərməsin
+        if (avatarImg && url) {
+            // Cache probleminin qarşısını almaq üçün timestamp əlavə edirik
             avatarImg.src = `${url}?t=${new Date().getTime()}`;
-            avatarImg.style.display = 'block';
-            if (avatarPlaceholder) avatarPlaceholder.style.display = 'none';
+            avatarImg.onload = () => {
+                avatarImg.style.display = 'block';
+                if (avatarPlaceholder) avatarPlaceholder.style.display = 'none';
+            };
+            avatarImg.onerror = () => {
+                avatarImg.style.display = 'none';
+                if (avatarPlaceholder) avatarPlaceholder.style.display = 'flex';
+            };
         }
     }
     
@@ -100,6 +114,7 @@ class ProfileManager {
             avatarInput.addEventListener('change', (e) => this.handleAvatarUpload(e));
         }
         
+        // Sənəd yükləmələri
         const idCardInput = document.getElementById('id-card-input');
         if (idCardInput) {
             idCardInput.addEventListener('change', (e) => this.handleDocumentUpload(e, 'id_card'));
@@ -138,8 +153,8 @@ class ProfileManager {
             if (error) throw error;
             this.showMessage('Profil uğurla yeniləndi', 'success');
         } catch (error) {
-            console.error('Profil yeniləmə xətası:', error);
-            this.showMessage('Yeniləmə zamanı xəta baş verdi', 'error');
+            console.error('Yeniləmə xətası:', error);
+            this.showMessage('Xəta baş verdi', 'error');
         } finally {
             this.showLoading(false);
         }
@@ -149,21 +164,14 @@ class ProfileManager {
         const file = event.target.files[0];
         if (!file) return;
 
-        const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-        if (!allowedTypes.includes(file.type)) {
-            this.showMessage('Yalnız JPG, PNG və ya WebP formatı qəbul edilir', 'error');
-            return;
-        }
-
         this.showLoading(true);
         
         try {
             const fileExt = file.name.split('.').pop();
-            const fileName = `${this.currentUser.id}-${Date.now()}.${fileExt}`;
-            // Qeyd: 'avatars/' qovluğunu deyil, birbaşa fayl adını istifadə edirik (Bucket daxilində)
+            const fileName = `${this.currentUser.id}/${Date.now()}.${fileExt}`;
             const filePath = fileName;
 
-            // 1. Şəkli Storage-a yüklə
+            // 1. Storage-a yüklə
             const { error: uploadError } = await supabaseClient
                 .storage
                 .from('profile-images')
@@ -171,13 +179,13 @@ class ProfileManager {
 
             if (uploadError) throw uploadError;
 
-            // 2. Şəklin Public (açıq) Linkini al
+            // 2. Public URL-i tam al (Əsas düzəliş buradadır)
             const { data: { publicUrl } } = supabaseClient
                 .storage
                 .from('profile-images')
                 .getPublicUrl(filePath);
 
-            // 3. Əldə olunan Public URL-i profil cədvəlinə yaz
+            // 3. Bazada avatar_url sütununu tam URL ilə yenilə
             const { error: updateError } = await supabaseClient
                 .from('profiles')
                 .update({ avatar_url: publicUrl })
@@ -195,7 +203,7 @@ class ProfileManager {
             this.showLoading(false);
         }
     }
-    
+
     async handleDocumentUpload(event, docType) {
         const file = event.target.files[0];
         if (!file) return;
@@ -204,35 +212,32 @@ class ProfileManager {
         
         try {
             const fileExt = file.name.split('.').pop();
-            const fileName = `${this.currentUser.id}-${docType}-${Date.now()}.${fileExt}`;
-            const filePath = fileName;
+            const fileName = `${this.currentUser.id}/${docType}_${Date.now()}.${fileExt}`;
 
-            // 1. Sənədi yüklə
             const { error: uploadError } = await supabaseClient
                 .storage
                 .from('user-documents')
-                .upload(filePath, file, { upsert: true });
+                .upload(fileName, file, { upsert: true });
 
             if (uploadError) throw uploadError;
 
-            // 2. Cədvələ qeyd et
             const { error: dbError } = await supabaseClient
                 .from('user_documents')
                 .upsert({
                     user_id: this.currentUser.id,
                     document_type: docType,
-                    document_url: filePath, // Sənədlər private olduğu üçün yalnız yolu saxlayırıq
+                    document_url: fileName,
                     status: 'pending',
                     uploaded_at: new Date().toISOString()
-                }, { onConflict: 'user_id,document_type' });
+                });
 
             if (dbError) throw dbError;
             
-            this.showMessage('Sənəd uğurla yükləndi və yoxlamaya göndərildi', 'success');
             this.updateDocumentStatus(docType, 'pending');
+            this.showMessage('Sənəd yükləndi', 'success');
             
         } catch (error) {
-            console.error('Sənəd yükləmə xətası:', error);
+            console.error('Sənəd xətası:', error);
             this.showMessage('Sənəd yüklənmədi', 'error');
         } finally {
             this.showLoading(false);
@@ -247,24 +252,16 @@ class ProfileManager {
                 'approved': '✅ Təsdiqləndi',
                 'rejected': '❌ Rədd edildi'
             };
-            statusEl.textContent = statusText[status] || status;
+            statusEl.textContent = statusText[status] || 'Yükləndi';
             statusEl.className = `doc-status ${status}`;
         }
     }
     
     async logout() {
-        try {
-            await supabaseClient.auth.signOut();
-            window.location.href = 'index.html';
-        } catch (error) {
-            this.showMessage('Çıxış zamanı xəta baş verdi', 'error');
-        }
+        await supabaseClient.auth.signOut();
+        window.location.href = 'index.html';
     }
 
-    isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-    
     showMessage(text, type) {
         const messageEl = document.getElementById('profile-message');
         if (messageEl) {
@@ -283,36 +280,6 @@ class ProfileManager {
     }
 }
 
-// Profil tamamlama səhifəsi
-class ProfileCompleteManager extends ProfileManager {
-    async init() {
-        const { data: { session } } = await supabaseClient.auth.getSession();
-        if (!session) {
-            window.location.href = 'login.html';
-            return;
-        }
-        this.currentUser = session.user;
-        
-        const { data: profile } = await supabaseClient
-            .from('profiles')
-            .select('first_name, last_name')
-            .eq('id', this.currentUser.id)
-            .single();
-        
-        if (profile?.first_name && profile?.last_name) {
-            window.location.href = 'profile.html';
-            return;
-        }
-        
-        await this.loadProfile();
-        this.attachEventListeners();
-    }
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    if (document.body.classList.contains('profile-complete-page')) {
-        new ProfileCompleteManager();
-    } else {
-        new ProfileManager();
-    }
+    new ProfileManager();
 });
