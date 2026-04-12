@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Uğur RentaCar</title>
+    <meta name="description" content="Uğur RentaCar İdarəetmə Paneli">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="admin-page">
+    <!-- Admin yoxlanışı - səhifə yüklənəndə işə düşür -->
+    <script>
+        // Səhifə yüklənən kimi admin yoxlanışı
+        (async function() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            
+            if (!session) {
+                window.location.href = 'admin-login.html';
+                return;
+            }
+            
+            // Admin yoxlanışı
+            const { data: adminData } = await supabaseClient
+                .from('admins')
+                .select('*')
+                .eq('id', session.user.id)
+                .single();
+            
+            if (!adminData) {
+                await supabaseClient.auth.signOut();
+                alert('İcazə yoxdur!');
+                window.location.href = 'admin-login.html';
+            }
+        })();
+    </script>
 
+    <!-- Admin Sidebar -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-header">
+            <h2>UĞUR RENTACAR</h2>
+            <span class="admin-label">Admin Panel</span>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                <span>📊</span> Dashboard
+            </a>
+            <a href="#reservations" class="nav-item" data-section="reservations">
+                <span>🚗</span> Rezervasiyalar
+            </a>
+            <a href="#cars" class="nav-item" data-section="cars">
+                <span>🚙</span> Maşınlar
+            </a>
+            <a href="#users" class="nav-item" data-section="users">
+                <span>👥</span> İstifadəçilər
+            </a>
+            <a href="#reviews" class="nav-item" data-section="reviews">
+                <span>⭐</span> Rəylər
+            </a>
+            <a href="#documents" class="nav-item" data-section="documents">
+                <span>📄</span> Sənədlər
+            </a>
+        </nav>
+        
+        <div class="sidebar-footer">
+            <button onclick="adminLogout()" class="btn btn-danger btn-full">
+                🚪 Çıxış
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <!-- Top Bar -->
+        <header class="admin-header">
+            <h1 id="page-title">Dashboard</h1>
+            <div class="admin-actions">
+                <span id="admin-name">Admin</span>
+                <button onclick="adminLogout()" class="btn btn-outline btn-sm">Çıxış</button>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="admin-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="admin-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Ümumi Rezervasiya</h3>
+                        <p class="stat-number" id="total-reservations">-</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Aktiv Kirayə</h3>
+                        <p class="stat-number" id="active-rentals">-</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Gözləmədə</h3>
+                        <p class="stat-number" id="pending-count">-</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Ümumi Gəlir</h3>
+                        <p class="stat-number" id="total-revenue">-</p>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h2>Son Əməliyyatlar</h2>
+                    <div id="recent-activity-list" class="activity-list">
+                        <!-- Dinamik doldurulacaq -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rezervasiyalar Section -->
+            <section id="reservations-section" class="admin-section">
+                <div class="section-header">
+                    <h2>Rezervasiyalar</h2>
+                    <div class="filter-bar">
+                        <select id="reservation-status-filter">
+                            <option value="all">Bütün statuslar</option>
+                            <option value="new">Yeni</option>
+                            <option value="awaiting_receipt">Çek gözlənilir</option>
+                            <option value="under_review">Yoxlanılır</option>
+                            <option value="approved">Təsdiqləndi</option>
+                            <option value="active_rental">Aktiv kirayə</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="reservations-table-container" class="table-container">
+                    <!-- Cədvəl dinamik doldurulacaq -->
+                </div>
+            </section>
+
+            <!-- Digər section-lar -->
+            <section id="cars-section" class="admin-section">
+                <h2>Maşın İdarəetməsi</h2>
+                <button class="btn btn-primary" onclick="openAddCarModal()">
+                    + Yeni maşın əlavə et
+                </button>
+                <div id="cars-table-container"></div>
+            </section>
+
+            <section id="users-section" class="admin-section">
+                <h2>İstifadəçilər</h2>
+                <div id="users-table-container"></div>
+            </section>
+
+            <section id="reviews-section" class="admin-section">
+                <h2>Rəylər</h2>
+                <div id="reviews-table-container"></div>
+            </section>
+
+            <section id="documents-section" class="admin-section">
+                <h2>Sənədlər</h2>
+                <div id="documents-table-container"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="assets/js/supabase.js"></script>
+    <script src="assets/js/auth-admin.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>
