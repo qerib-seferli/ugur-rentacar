@@ -1,215 +1,285 @@
-<!DOCTYPE html>
-<html lang="az">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profilim | Uğur RentaCar</title>
-    <meta name="description" content="Uğur RentaCar - Şəxsi profiliniz">
+/**
+ * UĞUR RENTACAR - PROFIL MƏNTİQİ
+ * Tam təkmilləşdirilmiş və şəkil problemi həll edilmiş versiya
+ */
+
+class ProfileManager {
+    constructor() {
+        this.currentUser = null;
+        this.profileData = null;
+        this.init();
+    }
     
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body class="profile-page">
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">UĞUR RENTACAR</a>
-            
-            <div class="nav-links">
-                <a href="cars.html">Maşınlar</a>
-                <a href="reservations.html">Rezervasiyalarım</a>
-                <a href="favorites.html">Sevimlilər</a>
-                <a href="profile.html" class="active">Profilim</a>
-                <button id="logout-btn" class="btn btn-outline">Çıxış</button>
-            </div>
-            
-            <button class="mobile-menu-btn" aria-label="Menyu">☰</button>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="profile-main">
-        <div class="container">
-            <h1 class="page-title">Profilim</h1>
-            
-            <div class="profile-grid">
-                <!-- Sol sütun - Profil məlumatları -->
-                <div class="profile-column">
-                    <div class="card profile-card">
-                        <h2 class="card-title">Şəxsi məlumatlar</h2>
-                        
-                        <!-- Profil şəkli -->
-                        <div class="avatar-section">
-                            <div class="avatar-wrapper">
-                                <img id="avatar-preview" src="" alt="Profil şəkli" style="display:none;">
-                                <div id="avatar-placeholder" class="avatar-placeholder">
-                                    <span>👤</span>
-                                </div>
-                                <label for="avatar-input" class="avatar-upload-btn">
-                                    📷 Şəkil dəyiş
-                                </label>
-                                <input type="file" id="avatar-input" accept="image/*" hidden>
-                            </div>
-                        </div>
-                        
-                        <!-- Profil formu -->
-                        <form id="profile-form" class="profile-form">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="first_name">Ad *</label>
-                                    <input type="text" id="first_name" required placeholder="Adınız">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="last_name">Soyad *</label>
-                                    <input type="text" id="last_name" required placeholder="Soyadınız">
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="phone">Telefon</label>
-                                <input type="tel" id="phone" readonly>
-                                <small class="form-hint">Telefon nömrəsi dəyişdirilə bilməz</small>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" placeholder="email@example.com">
-                            </div>
-                            
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="city">Şəhər</label>
-                                    <input type="text" id="city" placeholder="Məs: Bakı">
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="address">Ünvan</label>
-                                    <input type="text" id="address" placeholder="Ünvanınız">
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="bio">Özünüz haqqında</label>
-                                <textarea id="bio" rows="3" placeholder="Qısa məlumat..."></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Qeydiyyat tarixi</label>
-                                <p id="registration-date" class="readonly-field">-</p>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary btn-full">
-                                Yadda saxla
-                            </button>
-                        </form>
-                        
-                        <div id="profile-message" class="message" style="display:none;"></div>
-                    </div>
-                </div>
-                
-                <!-- Sağ sütun - Sənədlər və statistika -->
-                <div class="profile-column">
-                    <!-- Sənədlər bölməsi -->
-                    <div class="card documents-card">
-                        <h2 class="card-title">Sənədlərim</h2>
-                        
-                        <div class="document-item">
-                            <div class="doc-info">
-                                <span class="doc-icon">🆔</span>
-                                <div>
-                                    <h4>Şəxsiyyət vəsiqəsi</h4>
-                                    <span id="id_card-status" class="doc-status pending">⏳ Yüklənməyib</span>
-                                </div>
-                            </div>
-                            <label class="btn btn-outline btn-sm">
-                                Yüklə
-                                <input type="file" id="id-card-input" accept="image/*,.pdf" hidden>
-                            </label>
-                        </div>
-                        
-                        <div class="document-item">
-                            <div class="doc-info">
-                                <span class="doc-icon">🪪</span>
-                                <div>
-                                    <h4>Sürücülük vəsiqəsi</h4>
-                                    <span id="driver_license-status" class="doc-status pending">⏳ Yüklənməyib</span>
-                                </div>
-                            </div>
-                            <label class="btn btn-outline btn-sm">
-                                Yüklə
-                                <input type="file" id="license-input" accept="image/*,.pdf" hidden>
-                            </label>
-                        </div>
-                        
-                        <p class="doc-note">Sənədləriniz təhlükəsiz şəkildə saxlanılır və yalnız adminlər tərəfindən görülür.</p>
-                    </div>
-                    
-                    <!-- Sürətli keçidlər -->
-                    <div class="card quick-links">
-                        <h2 class="card-title">Sürətli keçidlər</h2>
-                        
-                        <a href="reservations.html" class="quick-link">
-                            <span>🚗</span>
-                            <div>
-                                <h4>Rezervasiyalarım</h4>
-                                <p>Bütün rezervasiyalarınızı görün</p>
-                            </div>
-                        </a>
-                        
-                        <a href="favorites.html" class="quick-link">
-                            <span>❤️</span>
-                            <div>
-                                <h4>Sevimlilər</h4>
-                                <p>Sevdiyiniz maşınlar</p>
-                            </div>
-                        </a>
-                        
-                        <a href="cars.html" class="quick-link">
-                            <span>🔍</span>
-                            <div>
-                                <h4>Maşın axtar</h4>
-                                <p>Yeni rezervasiya yaradın</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    async init() {
+        // Supabase sessiyasını yoxla
+        const { data: { session } } = await supabaseClient.auth.getSession();
         
-        <!-- Loading overlay -->
-        <div id="profile-loading" class="loading-overlay" style="display:none;">
-            <div class="spinner-large"></div>
-            <p>Əməliyyat aparılır...</p>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>UĞUR RENTACAR</h3>
-                    <p>Premium avtomobil kirayə xidməti</p>
-                </div>
-                
-                <div class="footer-contact">
-                    <h4>Əlaqə</h4>
-                    <p>Tel: <a href="tel:+994519500002">+994 51 950 00 02</a></p>
-                    <a href="https://wa.me/994519500002" class="whatsapp-link" target="_blank">WhatsApp</a>
-                    <p>Ünvan: <a href="https://maps.app.goo.gl/ncDgHheJCgAjBTuU6" target="_blank">Xəritədə bax</a></p>
-                </div>
-            </div>
+        if (!session) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        this.currentUser = session.user;
+        
+        // Məlumatları yüklə
+        await this.loadProfile();
+        
+        // Event listener-ləri qoş
+        this.attachEventListeners();
+        
+        // Çıxış düyməsi
+        const logoutBtn = document.getElementById('logout-btn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => this.logout());
+        }
+    }
+    
+    async loadProfile() {
+        try {
+            const { data, error } = await supabaseClient
+                .from('profiles')
+                .select('*')
+                .eq('id', this.currentUser.id)
+                .single();
             
-            <div class="footer-bottom">
-                <p>&copy; 2024 Uğur RentaCar. Bütün hüquqlar qorunur.</p>
-                <p class="developer">Senior Full Stack Developer: Qərib Səfərli</p>
-            </div>
-        </div>
-    </footer>
+            if (error) throw error;
+            
+            this.profileData = data;
+            this.populateForm(data);
+            
+        } catch (error) {
+            console.error('Profil yükləmə xətası:', error);
+            this.showMessage('Profil məlumatları yüklənmədi', 'error');
+        }
+    }
+    
+    populateForm(data) {
+        const fields = ['first_name', 'last_name', 'email', 'address', 'city', 'bio'];
+        
+        fields.forEach(field => {
+            const input = document.getElementById(field);
+            if (input && data[field]) {
+                input.value = data[field];
+            }
+        });
+        
+        // Telefon nömrəsini göstər (Auth-dan və ya profildən)
+        const phoneInput = document.getElementById('phone');
+        if (phoneInput) {
+            phoneInput.value = data.phone || this.currentUser.phone || '';
+        }
+        
+        // Şəkli göstər
+        if (data.avatar_url) {
+            this.displayAvatar(data.avatar_url);
+        }
+        
+        // Qeydiyyat tarixi
+        const regDateEl = document.getElementById('registration-date');
+        if (regDateEl && data.created_at) {
+            const date = new Date(data.created_at);
+            regDateEl.textContent = date.toLocaleDateString('az-AZ');
+        }
+    }
+    
+    displayAvatar(url) {
+        const avatarImg = document.getElementById('avatar-preview');
+        const avatarPlaceholder = document.getElementById('avatar-placeholder');
+        
+        if (avatarImg && url) {
+            // Cache probleminin qarşısını almaq üçün timestamp əlavə edirik
+            avatarImg.src = `${url}?t=${new Date().getTime()}`;
+            avatarImg.onload = () => {
+                avatarImg.style.display = 'block';
+                if (avatarPlaceholder) avatarPlaceholder.style.display = 'none';
+            };
+            avatarImg.onerror = () => {
+                avatarImg.style.display = 'none';
+                if (avatarPlaceholder) avatarPlaceholder.style.display = 'flex';
+            };
+        }
+    }
+    
+    attachEventListeners() {
+        const profileForm = document.getElementById('profile-form');
+        if (profileForm) {
+            profileForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.updateProfile();
+            });
+        }
+        
+        const avatarInput = document.getElementById('avatar-input');
+        if (avatarInput) {
+            avatarInput.addEventListener('change', (e) => this.handleAvatarUpload(e));
+        }
+        
+        // Sənəd yükləmələri
+        const idCardInput = document.getElementById('id-card-input');
+        if (idCardInput) {
+            idCardInput.addEventListener('change', (e) => this.handleDocumentUpload(e, 'id_card'));
+        }
+        
+        const licenseInput = document.getElementById('license-input');
+        if (licenseInput) {
+            licenseInput.addEventListener('change', (e) => this.handleDocumentUpload(e, 'driver_license'));
+        }
+    }
+    
+    async updateProfile() {
+        const formData = {
+            first_name: document.getElementById('first_name')?.value?.trim(),
+            last_name: document.getElementById('last_name')?.value?.trim(),
+            email: document.getElementById('email')?.value?.trim(),
+            address: document.getElementById('address')?.value?.trim(),
+            city: document.getElementById('city')?.value?.trim(),
+            bio: document.getElementById('bio')?.value?.trim(),
+            updated_at: new Date().toISOString()
+        };
+        
+        if (!formData.first_name || !formData.last_name) {
+            this.showMessage('Ad və soyad mütləqdir', 'error');
+            return;
+        }
+        
+        this.showLoading(true);
+        
+        try {
+            const { error } = await supabaseClient
+                .from('profiles')
+                .update(formData)
+                .eq('id', this.currentUser.id);
+            
+            if (error) throw error;
+            this.showMessage('Profil uğurla yeniləndi', 'success');
+        } catch (error) {
+            console.error('Yeniləmə xətası:', error);
+            this.showMessage('Xəta baş verdi', 'error');
+        } finally {
+            this.showLoading(false);
+        }
+    }
+    
+    async handleAvatarUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
 
-    <!-- Scripts -->
-    <script src="assets/js/supabase.js"></script>
-    <script src="assets/js/profile.js"></script>
-</body>
-</html>
+        this.showLoading(true);
+        
+        try {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${this.currentUser.id}/${Date.now()}.${fileExt}`;
+            const filePath = fileName;
+
+            // 1. Storage-a yüklə
+            const { error: uploadError } = await supabaseClient
+                .storage
+                .from('profile-images')
+                .upload(filePath, file, { upsert: true });
+
+            if (uploadError) throw uploadError;
+
+            // 2. Public URL-i tam al (Əsas düzəliş buradadır)
+            const { data: { publicUrl } } = supabaseClient
+                .storage
+                .from('profile-images')
+                .getPublicUrl(filePath);
+
+            // 3. Bazada avatar_url sütununu tam URL ilə yenilə
+            const { error: updateError } = await supabaseClient
+                .from('profiles')
+                .update({ avatar_url: publicUrl })
+                .eq('id', this.currentUser.id);
+
+            if (updateError) throw updateError;
+
+            this.displayAvatar(publicUrl);
+            this.showMessage('Profil şəkli yeniləndi', 'success');
+            
+        } catch (error) {
+            console.error('Şəkil yükləmə xətası:', error);
+            this.showMessage('Şəkil yüklənmədi', 'error');
+        } finally {
+            this.showLoading(false);
+        }
+    }
+
+    async handleDocumentUpload(event, docType) {
+        const file = event.target.files[0];
+        if (!file) return;
+        
+        this.showLoading(true);
+        
+        try {
+            const fileExt = file.name.split('.').pop();
+            const fileName = `${this.currentUser.id}/${docType}_${Date.now()}.${fileExt}`;
+
+            const { error: uploadError } = await supabaseClient
+                .storage
+                .from('user-documents')
+                .upload(fileName, file, { upsert: true });
+
+            if (uploadError) throw uploadError;
+
+            const { error: dbError } = await supabaseClient
+                .from('user_documents')
+                .upsert({
+                    user_id: this.currentUser.id,
+                    document_type: docType,
+                    document_url: fileName,
+                    status: 'pending',
+                    uploaded_at: new Date().toISOString()
+                });
+
+            if (dbError) throw dbError;
+            
+            this.updateDocumentStatus(docType, 'pending');
+            this.showMessage('Sənəd yükləndi', 'success');
+            
+        } catch (error) {
+            console.error('Sənəd xətası:', error);
+            this.showMessage('Sənəd yüklənmədi', 'error');
+        } finally {
+            this.showLoading(false);
+        }
+    }
+    
+    updateDocumentStatus(docType, status) {
+        const statusEl = document.getElementById(`${docType}-status`);
+        if (statusEl) {
+            const statusText = {
+                'pending': '⏳ Gözləmədə',
+                'approved': '✅ Təsdiqləndi',
+                'rejected': '❌ Rədd edildi'
+            };
+            statusEl.textContent = statusText[status] || 'Yükləndi';
+            statusEl.className = `doc-status ${status}`;
+        }
+    }
+    
+    async logout() {
+        await supabaseClient.auth.signOut();
+        window.location.href = 'index.html';
+    }
+
+    showMessage(text, type) {
+        const messageEl = document.getElementById('profile-message');
+        if (messageEl) {
+            messageEl.textContent = text;
+            messageEl.className = `message ${type}`;
+            messageEl.style.display = 'block';
+            setTimeout(() => { messageEl.style.display = 'none'; }, 5000);
+        }
+    }
+    
+    showLoading(show) {
+        const loadingEl = document.getElementById('profile-loading');
+        if (loadingEl) {
+            loadingEl.style.display = show ? 'flex' : 'none';
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    new ProfileManager();
+});
