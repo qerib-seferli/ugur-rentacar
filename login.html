@@ -1,1 +1,139 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş | Uğur RentaCar</title>
+    <meta name="description" content="Uğur RentaCar - Telefon nömrənizlə təhlükəsiz giriş">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Giriş | Uğur RentaCar">
+    <meta property="og:description" content="Telefon nömrənizlə təhlükəsiz giriş">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="auth-page">
+    <!-- Header -->
+    <header class="auth-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/img/logo.png" alt="Uğur RentaCar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <span class="logo-text" style="display:none;">UĞUR RENTACAR</span>
+            </a>
+        </div>
+    </header>
 
+    <!-- Main Content -->
+    <main class="auth-main">
+        <div class="auth-container">
+            <div class="auth-box">
+                <h1 class="auth-title">Hesabınıza daxil olun</h1>
+                <p class="auth-subtitle">Telefon nömrənizlə təhlükəsiz giriş</p>
+                
+                <!-- Telefon Input -->
+                <div class="form-group">
+                    <label for="phone-input">Telefon nömrəsi</label>
+                    <div class="phone-input-wrapper">
+                        <span class="phone-prefix">+994</span>
+                        <input 
+                            type="tel" 
+                            id="phone-input" 
+                            placeholder="XX XXX XX XX" 
+                            maxlength="14"
+                            autocomplete="tel"
+                        >
+                    </div>
+                    <small class="form-hint">Nümunə: 51 950 00 02</small>
+                </div>
+                
+                <!-- OTP Göndər Düyməsi -->
+                <button type="button" id="send-otp-btn" class="btn btn-primary btn-full">
+                    <span class="btn-text">Kod göndər</span>
+                    <span class="btn-loader" style="display:none;">
+                        <span class="spinner"></span>
+                    </span>
+                </button>
+                
+                <!-- OTP Bölməsi (gizli) -->
+                <div id="otp-section" class="otp-section" style="display:none;">
+                    <div class="divider">
+                        <span>SMS kodu daxil edin</span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="otp-input">Təsdiq kodu</label>
+                        <input 
+                            type="text" 
+                            id="otp-input" 
+                            placeholder="6 rəqəmli kod" 
+                            maxlength="6"
+                            inputmode="numeric"
+                            autocomplete="one-time-code"
+                        >
+                    </div>
+                    
+                    <button type="button" id="verify-otp-btn" class="btn btn-success btn-full">
+                        <span class="btn-text">Daxil ol</span>
+                        <span class="btn-loader" style="display:none;">
+                            <span class="spinner"></span>
+                        </span>
+                    </button>
+                </div>
+                
+                <!-- Mesaj bölməsi -->
+                <div id="auth-message" class="message" style="display:none;"></div>
+                
+                <!-- Loading -->
+                <div id="loading" class="loading-overlay" style="display:none;">
+                    <div class="spinner-large"></div>
+                    <p>Əməliyyat aparılır...</p>
+                </div>
+                
+                <!-- Admin linki -->
+                <div class="auth-links">
+                    <a href="admin-login.html" class="link-admin">Admin girişi</a>
+                </div>
+            </div>
+            
+            <!-- Məlumat kartı -->
+            <div class="auth-info">
+                <h3>Niyə telefon ilə giriş?</h3>
+                <ul class="feature-list">
+                    <li>🔒 Təhlükəsiz və sürətli</li>
+                    <li>📱 Şifrə yadda saxlamağa ehtiyac yoxdur</li>
+                    <li>⚡ Bir dəfəlik kod ilə daxil olun</li>
+                    <li>🛡️ İki faktorlu təhlükəsizlik</li>
+                </ul>
+                
+                <div class="contact-info">
+                    <p>Əlaqə: <a href="tel:+994519500002">+994 51 950 00 02</a></p>
+                    <a href="https://wa.me/994519500002?text=Salam%2C%20Uğur%20RentaCar%20haqqında%20məlumat%20istəyirəm" 
+                       class="whatsapp-btn" target="_blank">
+                        WhatsApp ilə yaz
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="auth-footer">
+        <div class="container">
+            <p>&copy; 2024 Uğur RentaCar. Bütün hüquqlar qorunur.</p>
+            <p class="developer">Senior Full Stack Developer: Qərib Səfərli</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/supabase.js"></script>
+    <script src="assets/js/auth-user.js"></script>
+</body>
+</html>
