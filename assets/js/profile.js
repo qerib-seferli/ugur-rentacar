@@ -1,6 +1,6 @@
 /**
  * UĞUR RENTACAR - PROFIL MƏNTİQİ
- * Tam təkmilləşdirilmiş və şəkil problemi həll edilmiş versiya
+ * CORS və Şəkil Yükləmə Problemləri Həll Edilmiş Tam Versiya
  */
 
 class ProfileManager {
@@ -12,9 +12,9 @@ class ProfileManager {
     
     async init() {
         // Supabase sessiyasını yoxla
-        const { data: { session } } = await supabaseClient.auth.getSession();
+        const { data: { session }, error: authError } = await supabaseClient.auth.getSession();
         
-        if (!session) {
+        if (!session || authError) {
             window.location.href = 'login.html';
             return;
         }
@@ -30,7 +30,7 @@ class ProfileManager {
         // Çıxış düyməsi
         const logoutBtn = document.getElementById('logout-btn');
         if (logoutBtn) {
-            logoutBtn.addEventListener('click', () => this.logout());
+            logoutBtn.onclick = () => this.logout();
         }
     }
     
@@ -63,7 +63,7 @@ class ProfileManager {
             }
         });
         
-        // Telefon nömrəsini göstər (Auth-dan və ya profildən)
+        // Telefon nömrəsini göstər
         const phoneInput = document.getElementById('phone');
         if (phoneInput) {
             phoneInput.value = data.phone || this.currentUser.phone || '';
@@ -82,21 +82,30 @@ class ProfileManager {
         }
     }
     
+    // Şəklin stabil göstərilməsi üçün təkmilləşdirilmiş funksiya
     displayAvatar(url) {
         const avatarImg = document.getElementById('avatar-preview');
         const avatarPlaceholder = document.getElementById('avatar-placeholder');
         
         if (avatarImg && url) {
-            // Cache probleminin qarşısını almaq üçün timestamp əlavə edirik
-            avatarImg.src = `${url}?t=${new Date().getTime()}`;
-            avatarImg.onload = () => {
+            // Şəklin yüklənmə sorğusunun ləğv edilməməsi üçün Image obyekti istifadə edirik
+            const imgLoader = new Image();
+            
+            imgLoader.onload = () => {
+                avatarImg.src = url;
                 avatarImg.style.display = 'block';
                 if (avatarPlaceholder) avatarPlaceholder.style.display = 'none';
             };
-            avatarImg.onerror = () => {
+            
+            imgLoader.onerror = () => {
+                console.error("Şəkil yüklənə bilmədi. URL və ya CORS icazələrini yoxlayın.");
                 avatarImg.style.display = 'none';
                 if (avatarPlaceholder) avatarPlaceholder.style.display = 'flex';
             };
+
+            // Brauzerə bunun bir media sorğusu olduğunu bildirmək üçün crossOrigin əlavə edirik
+            imgLoader.crossOrigin = "anonymous";
+            imgLoader.src = `${url}?t=${new Date().getTime()}`;
         }
     }
     
@@ -111,18 +120,17 @@ class ProfileManager {
         
         const avatarInput = document.getElementById('avatar-input');
         if (avatarInput) {
-            avatarInput.addEventListener('change', (e) => this.handleAvatarUpload(e));
+            avatarInput.onchange = (e) => this.handleAvatarUpload(e);
         }
         
-        // Sənəd yükləmələri
         const idCardInput = document.getElementById('id-card-input');
         if (idCardInput) {
-            idCardInput.addEventListener('change', (e) => this.handleDocumentUpload(e, 'id_card'));
+            idCardInput.onchange = (e) => this.handleDocumentUpload(e, 'id_card');
         }
         
         const licenseInput = document.getElementById('license-input');
         if (licenseInput) {
-            licenseInput.addEventListener('change', (e) => this.handleDocumentUpload(e, 'driver_license'));
+            licenseInput.onchange = (e) => this.handleDocumentUpload(e, 'driver_license');
         }
     }
     
@@ -154,7 +162,7 @@ class ProfileManager {
             this.showMessage('Profil uğurla yeniləndi', 'success');
         } catch (error) {
             console.error('Yeniləmə xətası:', error);
-            this.showMessage('Xəta baş verdi', 'error');
+            this.showMessage('Məlumatlar yadda saxlanılmadı', 'error');
         } finally {
             this.showLoading(false);
         }
@@ -169,23 +177,25 @@ class ProfileManager {
         try {
             const fileExt = file.name.split('.').pop();
             const fileName = `${this.currentUser.id}/${Date.now()}.${fileExt}`;
-            const filePath = fileName;
 
             // 1. Storage-a yüklə
             const { error: uploadError } = await supabaseClient
                 .storage
                 .from('profile-images')
-                .upload(filePath, file, { upsert: true });
+                .upload(fileName, file, { 
+                    upsert: true,
+                    cacheControl: '3600'
+                });
 
             if (uploadError) throw uploadError;
 
-            // 2. Public URL-i tam al (Əsas düzəliş buradadır)
+            // 2. Public URL-i al
             const { data: { publicUrl } } = supabaseClient
                 .storage
                 .from('profile-images')
-                .getPublicUrl(filePath);
+                .getPublicUrl(fileName);
 
-            // 3. Bazada avatar_url sütununu tam URL ilə yenilə
+            // 3. Bazanı yenilə
             const { error: updateError } = await supabaseClient
                 .from('profiles')
                 .update({ avatar_url: publicUrl })
@@ -198,7 +208,7 @@ class ProfileManager {
             
         } catch (error) {
             console.error('Şəkil yükləmə xətası:', error);
-            this.showMessage('Şəkil yüklənmədi', 'error');
+            this.showMessage('Şəkil yüklənmədi (CORS və ya Permission xətası)', 'error');
         } finally {
             this.showLoading(false);
         }
@@ -280,6 +290,7 @@ class ProfileManager {
     }
 }
 
+// Səhifə hazır olanda meneceri işə sal
 document.addEventListener('DOMContentLoaded', () => {
     new ProfileManager();
 });
