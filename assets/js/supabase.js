@@ -6,8 +6,8 @@
 // ==========================================
 // BURAYA ÖZ SUPABASE MƏLUMATLARINIZI YAZIN
 // ==========================================
-const SUPABASE_URL = 'https://your-project-url.supabase.co';
-const SUPABASE_ANON_KEY = 'your-anon-key-here';
+const SUPABASE_URL = 'https://vytmnkywcpeyahgbvjdi.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5dG1ua3l3Y3BleWFoZ2J2amRpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU5Mzg2NTQsImV4cCI6MjA5MTUxNDY1NH0.gBqTbzaCwXKQr132Gfzp8SGjpOr9cmiYwGl8Srw221Y';
 
 // Supabase client yaratmaq
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
