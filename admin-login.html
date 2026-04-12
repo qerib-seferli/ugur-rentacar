@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Girişi | Uğur RentaCar</title>
+    <meta name="description" content="Uğur RentaCar Admin Panel">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="admin-login-page auth-page">
+    <header class="auth-header">
+        <div class="container">
+            <a href="index.html" class="logo">UĞUR RENTACAR</a>
+        </div>
+    </header>
 
+    <main class="auth-main">
+        <div class="auth-container" style="max-width: 450px;">
+            <div class="auth-box">
+                <div class="admin-badge">🔒 ADMIN PANEL</div>
+                
+                <h1 class="auth-title">Admin Girişi</h1>
+                <p class="auth-subtitle">Yalnız səlahiyyətli şəxslər üçün</p>
+                
+                <form id="admin-login-form" class="admin-form">
+                    <div class="form-group">
+                        <label for="admin-email">Email ünvanı</label>
+                        <input 
+                            type="email" 
+                            id="admin-email" 
+                            required 
+                            placeholder="admin@example.com"
+                            autocomplete="email"
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="admin-password">Şifrə</label>
+                        <input 
+                            type="password" 
+                            id="admin-password" 
+                            required 
+                            placeholder="••••••••"
+                            autocomplete="current-password"
+                        >
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full btn-lg">
+                        Daxil ol
+                    </button>
+                </form>
+                
+                <div id="admin-message" class="message" style="display:none;"></div>
+                
+                <div class="auth-links" style="margin-top: 2rem;">
+                    <a href="login.html" class="link-back">← User girişinə qayıt</a>
+                </div>
+            </div>
+            
+            <div id="admin-loading" class="loading-overlay" style="display:none;">
+                <div class="spinner-large"></div>
+                <p>Daxil olunur...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="auth-footer">
+        <div class="container">
+            <p class="security-notice">🔒 Bu səhifə təhlükəsiz əlaqə ilə qorunur</p>
+            <p class="developer">Senior Full Stack Developer: Qərib Səfərli</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/supabase.js"></script>
+    <script src="assets/js/auth-admin.js"></script>
+</body>
+</html>
