@@ -1,1 +1,215 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profilim | Uğur RentaCar</title>
+    <meta name="description" content="Uğur RentaCar - Şəxsi profiliniz">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="profile-page">
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">UĞUR RENTACAR</a>
+            
+            <div class="nav-links">
+                <a href="cars.html">Maşınlar</a>
+                <a href="reservations.html">Rezervasiyalarım</a>
+                <a href="favorites.html">Sevimlilər</a>
+                <a href="profile.html" class="active">Profilim</a>
+                <button id="logout-btn" class="btn btn-outline">Çıxış</button>
+            </div>
+            
+            <button class="mobile-menu-btn" aria-label="Menyu">☰</button>
+        </div>
+    </nav>
 
+    <!-- Main Content -->
+    <main class="profile-main">
+        <div class="container">
+            <h1 class="page-title">Profilim</h1>
+            
+            <div class="profile-grid">
+                <!-- Sol sütun - Profil məlumatları -->
+                <div class="profile-column">
+                    <div class="card profile-card">
+                        <h2 class="card-title">Şəxsi məlumatlar</h2>
+                        
+                        <!-- Profil şəkli -->
+                        <div class="avatar-section">
+                            <div class="avatar-wrapper">
+                                <img id="avatar-preview" src="" alt="Profil şəkli" style="display:none;">
+                                <div id="avatar-placeholder" class="avatar-placeholder">
+                                    <span>👤</span>
+                                </div>
+                                <label for="avatar-input" class="avatar-upload-btn">
+                                    📷 Şəkil dəyiş
+                                </label>
+                                <input type="file" id="avatar-input" accept="image/*" hidden>
+                            </div>
+                        </div>
+                        
+                        <!-- Profil formu -->
+                        <form id="profile-form" class="profile-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="first_name">Ad *</label>
+                                    <input type="text" id="first_name" required placeholder="Adınız">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="last_name">Soyad *</label>
+                                    <input type="text" id="last_name" required placeholder="Soyadınız">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Telefon</label>
+                                <input type="tel" id="phone" readonly>
+                                <small class="form-hint">Telefon nömrəsi dəyişdirilə bilməz</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" placeholder="email@example.com">
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city">Şəhər</label>
+                                    <input type="text" id="city" placeholder="Məs: Bakı">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="address">Ünvan</label>
+                                    <input type="text" id="address" placeholder="Ünvanınız">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="bio">Özünüz haqqında</label>
+                                <textarea id="bio" rows="3" placeholder="Qısa məlumat..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Qeydiyyat tarixi</label>
+                                <p id="registration-date" class="readonly-field">-</p>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-full">
+                                Yadda saxla
+                            </button>
+                        </form>
+                        
+                        <div id="profile-message" class="message" style="display:none;"></div>
+                    </div>
+                </div>
+                
+                <!-- Sağ sütun - Sənədlər və statistika -->
+                <div class="profile-column">
+                    <!-- Sənədlər bölməsi -->
+                    <div class="card documents-card">
+                        <h2 class="card-title">Sənədlərim</h2>
+                        
+                        <div class="document-item">
+                            <div class="doc-info">
+                                <span class="doc-icon">🆔</span>
+                                <div>
+                                    <h4>Şəxsiyyət vəsiqəsi</h4>
+                                    <span id="id_card-status" class="doc-status pending">⏳ Yüklənməyib</span>
+                                </div>
+                            </div>
+                            <label class="btn btn-outline btn-sm">
+                                Yüklə
+                                <input type="file" id="id-card-input" accept="image/*,.pdf" hidden>
+                            </label>
+                        </div>
+                        
+                        <div class="document-item">
+                            <div class="doc-info">
+                                <span class="doc-icon">🪪</span>
+                                <div>
+                                    <h4>Sürücülük vəsiqəsi</h4>
+                                    <span id="driver_license-status" class="doc-status pending">⏳ Yüklənməyib</span>
+                                </div>
+                            </div>
+                            <label class="btn btn-outline btn-sm">
+                                Yüklə
+                                <input type="file" id="license-input" accept="image/*,.pdf" hidden>
+                            </label>
+                        </div>
+                        
+                        <p class="doc-note">Sənədləriniz təhlükəsiz şəkildə saxlanılır və yalnız adminlər tərəfindən görülür.</p>
+                    </div>
+                    
+                    <!-- Sürətli keçidlər -->
+                    <div class="card quick-links">
+                        <h2 class="card-title">Sürətli keçidlər</h2>
+                        
+                        <a href="reservations.html" class="quick-link">
+                            <span>🚗</span>
+                            <div>
+                                <h4>Rezervasiyalarım</h4>
+                                <p>Bütün rezervasiyalarınızı görün</p>
+                            </div>
+                        </a>
+                        
+                        <a href="favorites.html" class="quick-link">
+                            <span>❤️</span>
+                            <div>
+                                <h4>Sevimlilər</h4>
+                                <p>Sevdiyiniz maşınlar</p>
+                            </div>
+                        </a>
+                        
+                        <a href="cars.html" class="quick-link">
+                            <span>🔍</span>
+                            <div>
+                                <h4>Maşın axtar</h4>
+                                <p>Yeni rezervasiya yaradın</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loading overlay -->
+        <div id="profile-loading" class="loading-overlay" style="display:none;">
+            <div class="spinner-large"></div>
+            <p>Əməliyyat aparılır...</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>UĞUR RENTACAR</h3>
+                    <p>Premium avtomobil kirayə xidməti</p>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Əlaqə</h4>
+                    <p>Tel: <a href="tel:+994519500002">+994 51 950 00 02</a></p>
+                    <a href="https://wa.me/994519500002" class="whatsapp-link" target="_blank">WhatsApp</a>
+                    <p>Ünvan: <a href="https://maps.app.goo.gl/ncDgHheJCgAjBTuU6" target="_blank">Xəritədə bax</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Uğur RentaCar. Bütün hüquqlar qorunur.</p>
+                <p class="developer">Senior Full Stack Developer: Qərib Səfərli</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/supabase.js"></script>
+    <script src="assets/js/profile.js"></script>
+</body>
+</html>
