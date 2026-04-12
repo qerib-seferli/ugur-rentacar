@@ -1,1 +1,128 @@
-
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Səhifə Tapılmadı | Uğur RentaCar</title>
+    <meta name="description" content="Axtardığınız səhifə tapılmadı">
+    <meta name="robots" content="noindex, follow">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .error-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .error-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+        
+        .error-description {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+        
+        .error-illustration {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .error-suggestions {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .error-suggestions h3 {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            color: var(--gray-800);
+        }
+        
+        .error-suggestions ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .error-suggestions a {
+            color: var(--primary);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background 0.2s;
+        }
+        
+        .error-suggestions a:hover {
+            background: var(--primary-light);
+        }
+    </style>
+</head>
+<body class="error-page">
+    <div class="error-illustration">🚗💨</div>
+    
+    <h1 class="error-code">404</h1>
+    <h2 class="error-title">Səhifə tapılmadı</h2>
+    
+    <p class="error-description">
+        Axtardığınız səhifə mövcud deyil, silinib və ya ünvanı dəyişdirilib. 
+        Ana səhifəyə qayıdaraq davam edə bilərsiniz.
+    </p>
+    
+    <div class="error-actions">
+        <a href="index.html" class="btn btn-primary btn-lg">
+            🏠 Ana səhifə
+        </a>
+        <a href="cars.html" class="btn btn-outline btn-lg">
+            🚗 Maşın kataloqu
+        </a>
+        <a href="javascript:history.back()" class="btn btn-text btn-lg">
+            ← Geri qayıt
+        </a>
+    </div>
+    
+    <div class="error-suggestions">
+        <h3>Populyar keçidlər:</h3>
+        <ul>
+            <li><a href="cars.html">🚙 Bütün maşınlara bax</a></li>
+            <li><a href="login.html">🔐 Hesaba daxil ol</a></li>
+            <li><a href="https://wa.me/994519500002" target="_blank">💬 WhatsApp dəstək</a></li>
+        </ul>
+    </div>
+    
+    <footer style="margin-top: 3rem; color: var(--gray-500);">
+        <p>© 2024 Uğur RentaCar</p>
+        <p style="font-size: 0.875rem; margin-top: 0.5rem;">Senior Full Stack Developer: Qərib Səfərli</p>
+    </footer>
+</body>
+</html>
