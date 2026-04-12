@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maşın Kataloqu | Uğur RentaCar</title>
+    <meta name="description" content="Uğur RentaCar - Premium avtomobil kataloqu. Geniş seçim, münasib qiymətlər.">
+    
+    <meta property="og:title" content="Maşın Kataloqu | Uğur RentaCar">
+    <meta property="og:description" content="Premium avtomobil kirayəsi">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="cars-page">
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">UĞUR RENTACAR</a>
+            
+            <div class="nav-links">
+                <a href="cars.html" class="active">Maşınlar</a>
+                <a href="favorites.html">Sevimlilər</a>
+                <a href="reservations.html">Rezervasiyalarım</a>
+                <a href="profile.html">Profilim</a>
+            </div>
+            
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
 
+    <!-- Main Content -->
+    <main class="catalog-main">
+        <div class="container">
+            <div class="catalog-header">
+                <h1 class="page-title">Avtomobil Kataloqu</h1>
+                <p id="cars-count" class="results-count">Yüklənir...</p>
+            </div>
+            
+            <div class="catalog-layout">
+                <!-- Sidebar Filters -->
+                <aside class="filters-sidebar">
+                    <div class="filter-section">
+                        <h3>🔍 Axtarış</h3>
+                        <input type="text" id="search-input" placeholder="Marka, model axtar...">
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h3>💰 Qiymət aralığı</h3>
+                        <div class="price-inputs">
+                            <input type="number" id="filter-min-price" placeholder="Min ₼">
+                            <span>-</span>
+                            <input type="number" id="filter-max-price" placeholder="Max ₼">
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <h3>⚙️ Filterlər</h3>
+                        
+                        <div class="filter-group">
+                            <label>Marka</label>
+                            <select id="filter-brand">
+                                <option value="">Bütün markalar</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Ban növü</label>
+                            <select id="filter-body-type">
+                                <option value="">Hamısı</option>
+                                <option value="sedan">Sedan</option>
+                                <option value="suv">SUV</option>
+                                <option value="hatchback">Hatchback</option>
+                                <option value="coupe">Coupe</option>
+                                <option value="convertible">Kabriolet</option>
+                                <option value="van">Minivan</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Sürətlər qutusu</label>
+                            <select id="filter-transmission">
+                                <option value="">Hamısı</option>
+                                <option value="avtomat">Avtomat</option>
+                                <option value="mexanika">Mexanika</option>
+                                <option value="robot">Robot</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Yanacaq növü</label>
+                            <select id="filter-fuel">
+                                <option value="">Hamısı</option>
+                                <option value="benzin">Benzin</option>
+                                <option value="dizel">Dizel</option>
+                                <option value="qaz">Qaz</option>
+                                <option value="elektrik">Elektrik</option>
+                                <option value="hibrid">Hibrid</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label>Oturacaq sayı</label>
+                            <select id="filter-seats">
+                                <option value="">Hamısı</option>
+                                <option value="2">2</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="7">7</option>
+                                <option value="8">8+</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="filter-vip">
+                                <span>⭐ Yalnız VIP</span>
+                            </label>
+                        </div>
+                        
+                        <button onclick="carCatalog.clearFilters()" class="btn btn-outline btn-full">
+                            Filterləri təmizlə
+                        </button>
+                    </div>
+                </aside>
+                
+                <!-- Cars Grid -->
+                <div class="cars-content">
+                    <div class="sort-bar">
+                        <label>Sırala:</label>
+                        <select id="sort-select">
+                            <option value="default">Varsayılan</option>
+                            <option value="price-asc">Qiymət: Aşağıdan yuxarı</option>
+                            <option value="price-desc">Qiymət: Yuxarıdan aşağı</option>
+                            <option value="year-desc">İl: Yenidən köhnəyə</option>
+                            <option value="rating">Reytinq</option>
+                        </select>
+                    </div>
+                    
+                    <div id="cars-grid" class="cars-container">
+                        <div class="loading-spinner">
+                            <div class="spinner-large"></div>
+                            <p>Maşınlar yüklənir...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>UĞUR RENTACAR</h3>
+                    <p>Premium avtomobil kirayə xidməti</p>
+                </div>
+                <div class="footer-contact">
+                    <p>Tel: <a href="tel:+994519500002">+994 51 950 00 02</a></p>
+                    <a href="https://wa.me/994519500002" target="_blank">WhatsApp</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Uğur RentaCar</p>
+                <p class="developer">Senior Full Stack Developer: Qərib Səfərli</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/supabase.js"></script>
+    <script src="assets/js/cars.js"></script>
+</body>
+</html>
