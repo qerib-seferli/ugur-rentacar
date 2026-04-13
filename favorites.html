@@ -13,41 +13,30 @@
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="assets/css/utilities.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
-  <link rel="stylesheet" href="assets/css/auth.css" />
-      <title>OTP Giriş | Uğur RentaCar</title>
-      <meta name="description" content="Telefon nömrəsi ilə OTP giriş sistemi." />
+  <link rel="stylesheet" href="assets/css/cars.css" />
+      <title>Sevimlilər | Uğur RentaCar</title>
+      <meta name="description" content="Sevdiyiniz maşınları bir yerdə saxlayın." />
       <meta name="robots" content="index, follow" />
-      <meta property="og:title" content="OTP Giriş | Uğur RentaCar" />
-      <meta property="og:description" content="Telefon nömrəsi ilə OTP giriş sistemi." />
+      <meta property="og:title" content="Sevimlilər | Uğur RentaCar" />
+      <meta property="og:description" content="Sevdiyiniz maşınları bir yerdə saxlayın." />
       <meta property="og:type" content="website" />
       <meta property="og:image" content="foto/fon-foto.png" />
       <meta property="og:locale" content="az_AZ" />
       <meta name="twitter:card" content="summary_large_image" />
 
     </head>
-    <body class="page-auth">
+    <body class="page-favorites">
       <div class="site-shell">
         <div id="app-header"></div>
-        <main class="page-main auth-main">
-  <section class="auth-card glass-panel">
-    <img class="auth-logo" src="foto/logo.png" alt="Uğur RentaCar logo" />
-    <div class="eyebrow">User OTP Login</div>
-    <h1>Telefon ilə giriş</h1>
-    <form id="otpRequestForm" class="stack-md">
-      <div class="field-group">
-        <label for="otpPhone">Telefon nömrəsi</label>
-        <input id="otpPhone" type="tel" placeholder="+994501234567" required />
+        <main class="page-main">
+  <section class="section compact-top">
+    <div class="section__header">
+      <div>
+        <span class="eyebrow">Sevimlilər</span>
+        <h1>Seçilmiş avtomobillər</h1>
       </div>
-      <button class="btn btn-gold" type="submit">OTP göndər</button>
-    </form>
-    <form id="otpVerifyForm" class="stack-md">
-      <div class="field-group">
-        <label for="otpCode">OTP kodu</label>
-        <input id="otpCode" type="text" placeholder="123456" required />
-      </div>
-      <button class="btn btn-primary" type="submit">Daxil ol</button>
-    </form>
-    <div id="otpMessage" class="inline-message"></div>
+    </div>
+    <div class="car-grid" id="favoriteCarsGrid"></div>
   </section>
 </main>
 
@@ -63,6 +52,7 @@
       <script src="assets/js/ui.js" defer></script>
       <script src="assets/js/guards.js" defer></script>
       <script src="assets/js/app.js" defer></script>
-      <script src="assets/js/auth-user.js" defer></script>
+      <script src="assets/js/favorites.js" defer></script>
+  <script src="assets/js/cars.js" defer></script>
     </body>
     </html>

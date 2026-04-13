@@ -1,0 +1,33 @@
+
+.admin-layout{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:22px;
+}
+.admin-sidebar,.admin-panel{padding:22px}
+.admin-sidebar{position:sticky; top:108px; height:max-content}
+.admin-nav{display:grid;gap:10px;margin:18px 0}
+.admin-tab{
+  min-height:46px;border-radius:14px;border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.03);color:var(--text);cursor:pointer;text-align:left;padding:0 14px;
+}
+.admin-tab.is-active{background:linear-gradient(135deg, rgba(244,201,107,.18), rgba(244,201,107,.08)); border-color:rgba(244,201,107,.26)}
+.admin-panel{display:none}
+.admin-panel.is-visible{display:block}
+.panel-head{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px
+}
+.stat-card{
+  padding:18px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)
+}
+@media (max-width: 1080px){
+  .admin-layout{grid-template-columns:1fr}
+  .admin-sidebar{position:static}
+}
+@media (max-width: 680px){
+  .stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .panel-head{flex-direction:column;align-items:flex-start}
+}

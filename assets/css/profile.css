@@ -1,0 +1,27 @@
+
+.profile-layout{
+  display:grid;
+  grid-template-columns:340px 1fr;
+  gap:22px;
+}
+.profile-side,.profile-form,.contract-panel{padding:24px}
+.avatar-box{
+  width:150px;height:150px;margin:0 auto 18px;
+  border-radius:50%;overflow:hidden;border:2px solid rgba(244,201,107,.25);
+}
+.avatar-box img{width:100%;height:100%;object-fit:cover}
+.side-list{display:grid;gap:10px;padding:0;margin:18px 0 0;list-style:none}
+.side-list a{
+  display:flex;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+.contract-content{display:grid;gap:14px;color:#dce8f8}
+@media (max-width: 920px){
+  .profile-layout{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+}

@@ -1,0 +1,15 @@
+
+.page-auth .auth-card{
+  position:relative;
+  box-shadow:0 24px 80px rgba(0,0,0,.38), 0 0 60px rgba(66, 127, 255, .08);
+}
+.page-auth .auth-card::after{
+  content:"";
+  position:absolute;
+  inset:auto -15% -35% auto;
+  width:180px;
+  height:180px;
+  background:radial-gradient(circle, rgba(244,201,107,.24), transparent 68%);
+  filter:blur(20px);
+  pointer-events:none;
+}

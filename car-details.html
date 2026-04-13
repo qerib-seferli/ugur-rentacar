@@ -1,0 +1,84 @@
+    <!DOCTYPE html>
+    <html lang="az">
+    <head>
+      <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="theme-color" content="#07111f" />
+  <link rel="icon" type="image/png" href="foto/favicon.png" />
+  <link rel="manifest" href="assets/seo/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/utilities.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="assets/css/cars.css" />
+  <link rel="stylesheet" href="assets/css/reservation.css" />
+      <title>Maşın detalları | Uğur RentaCar</title>
+      <meta name="description" content="Seçilmiş maşın haqqında tam məlumat, şəkillər, rəylər və rezervasiya hissəsi." />
+      <meta name="robots" content="index, follow" />
+      <meta property="og:title" content="Maşın detalları | Uğur RentaCar" />
+      <meta property="og:description" content="Seçilmiş maşın haqqında tam məlumat, şəkillər, rəylər və rezervasiya hissəsi." />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="foto/fon-foto.png" />
+      <meta property="og:locale" content="az_AZ" />
+      <meta name="twitter:card" content="summary_large_image" />
+
+    </head>
+    <body class="page-details">
+      <div class="site-shell">
+        <div id="app-header"></div>
+        <main class="page-main">
+  <section class="section compact-top" id="carDetailsPage">
+    <div class="details-layout">
+      <div class="glass-panel media-gallery">
+        <img id="detailMainImage" src="foto/default-car.webp" alt="Maşın şəkli" class="gallery-main" />
+        <div class="thumb-row" id="detailThumbs"></div>
+      </div>
+      <div class="glass-panel detail-sidebar">
+        <div class="eyebrow">Ətraflı baxış</div>
+        <h1 id="detailTitle">Maşın yüklənir...</h1>
+        <div class="status-row" id="detailBadges"></div>
+        <div class="price-box">
+          <div><span>Günlük</span><strong id="detailDailyPrice">-- AZN</strong></div>
+          <div><span>Aylıq</span><strong id="detailMonthlyPrice">-- AZN</strong></div>
+        </div>
+        <p id="detailDescription">Məlumat hazırlanır...</p>
+        <div class="spec-grid" id="detailSpecs"></div>
+        <div class="hero__actions">
+          <a class="btn btn-gold" id="detailReserveBtn" href="reservation.html">Bron et</a>
+          <button class="btn btn-dark" id="detailFavoriteBtn" type="button">Sevimliyə əlavə et</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__header">
+      <div>
+        <span class="eyebrow">Rəylər</span>
+        <h2>İstifadəçi rəyləri</h2>
+      </div>
+    </div>
+    <div class="review-grid" id="detailReviews"></div>
+  </section>
+</main>
+
+        <div id="app-footer"></div>
+        <button class="floating-whatsapp" id="floatingWhatsapp" aria-label="WhatsApp ilə əlaqə">
+          <span>WhatsApp</span>
+        </button>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <script src="assets/js/supabase-config.js" defer></script>
+      <script src="assets/js/supabase-client.js" defer></script>
+      <script src="assets/js/utils.js" defer></script>
+      <script src="assets/js/ui.js" defer></script>
+      <script src="assets/js/guards.js" defer></script>
+      <script src="assets/js/app.js" defer></script>
+      <script src="assets/js/car-details.js" defer></script>
+  <script src="assets/js/favorites.js" defer></script>
+  <script src="assets/js/reviews.js" defer></script>
+    </body>
+    </html>

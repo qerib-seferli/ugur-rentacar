@@ -1,0 +1,29 @@
+
+@media (max-width: 1100px){
+  .hero{grid-template-columns:1fr}
+  .quick-search{grid-template-columns:1fr 1fr}
+  .footer-grid, .two-col-grid{grid-template-columns:1fr}
+  .site-header{grid-template-columns:1fr; justify-items:start}
+  .nav-links{justify-content:flex-start}
+}
+@media (max-width: 780px){
+  :root{
+    --fs-h1:clamp(28px,8vw,40px);
+    --fs-h2:clamp(22px,7vw,32px);
+    --fs-h3:clamp(18px,5vw,22px);
+  }
+  .page-main{width:min(calc(100% - 20px), var(--container))}
+  .section__header{flex-direction:column; align-items:flex-start}
+  .quick-search{grid-template-columns:1fr}
+  .hero__content,.info-card,.prose-panel,.auth-card{padding:22px}
+  .brand{width:100%}
+  .nav-actions{width:100%; flex-wrap:wrap}
+}
+@media (max-width: 560px){
+  body{font-size:14px}
+  .site-header{padding:12px}
+  .hero{min-height:auto}
+  .hero-car-card img{min-height:240px}
+  .btn{width:100%}
+  .hero__actions{display:grid;grid-template-columns:1fr}
+}

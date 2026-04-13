@@ -1,576 +1,116 @@
-<!DOCTYPE html>
-<html lang="az">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uğur RentaCar - Premium Avtomobil Kirayəsi</title>
-    <meta name="description" content="Uğur RentaCar - Azərbaycanın premium avtomobil kirayə şirkəti. Geniş avtomobil parkı, münasib qiymətlər, peşəkar xidmət.">
-    <meta name="keywords" content="rent a car, avtomobil kirayəsi, bakı rent car, maşın kirayə">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Uğur RentaCar - Premium Avtomobil Kirayəsi">
-    <meta property="og:description" content="Azərbaycanın premium avtomobil kirayə şirkəti">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ugur-rentacar.az">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/style.css">
-    
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body class="home-page">
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">UĞUR RENTACAR</a>
-            
-            <div class="nav-links">
-                <a href="cars.html">Maşınlar</a>
-                <a href="favorites.html">Sevimlilər</a>
-                <a href="reservations.html">Rezervasiyalarım</a>
-                <a href="profile.html">Profilim</a>
-                <a href="login.html" class="btn btn-primary btn-sm">Giriş</a>
-            </div>
-            
-            <button class="mobile-menu-btn" aria-label="Menyu">☰</button>
-        </div>
-    </nav>
+    <!DOCTYPE html>
+    <html lang="az">
+    <head>
+      <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="theme-color" content="#07111f" />
+  <link rel="icon" type="image/png" href="foto/favicon.png" />
+  <link rel="manifest" href="assets/seo/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/utilities.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="assets/css/cars.css" />
+      <title>Ana Səhifə | Uğur RentaCar</title>
+      <meta name="description" content="Premium avtomobil icarəsi, VIP və ekonomik maşınlar, rahat rezervasiya və peşəkar xidmət." />
+      <meta name="robots" content="index, follow" />
+      <meta property="og:title" content="Ana Səhifə | Uğur RentaCar" />
+      <meta property="og:description" content="Premium avtomobil icarəsi, VIP və ekonomik maşınlar, rahat rezervasiya və peşəkar xidmət." />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="foto/fon-foto.png" />
+      <meta property="og:locale" content="az_AZ" />
+      <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Hero Section -->
-    <section class="hero" style="background-image: url('foto/fon-foto.png');">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <h1 class="hero-title">Premium Avtomobil Kirayəsi</h1>
-            <p class="hero-subtitle">
-                Azərbaycanın ən etibarlı rent a car şirkəti.<br>
-                Geniş avtomobil parkı, münasib qiymətlər, 24/7 dəstək.
-            </p>
-            
-            <div class="hero-cta">
-                <a href="cars.html" class="btn btn-primary btn-lg">
-                    🚗 Maşınlara bax
-                </a>
-                <a href="https://wa.me/994519500002?text=Salam%2C%20maşın%20kirayə%20almaq%20istəyirəm" 
-                   class="btn btn-success btn-lg" target="_blank">
-                    💬 WhatsApp ilə yaz
-                </a>
-            </div>
-            
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">50+</span>
-                    <span class="stat-label">Avtomobil</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">1000+</span>
-                    <span class="stat-label">Məmnun müştəri</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">24/7</span>
-                    <span class="stat-label">Dəstək</span>
-                </div>
-            </div>
+    </head>
+    <body class="page-home">
+      <div class="site-shell">
+        <div id="app-header"></div>
+        <main class="page-main">
+  <section class="hero hero-home">
+    <div class="hero__content glass-panel">
+      <div class="eyebrow">Premium avtomobil icarəsi</div>
+      <h1>UĞUR RENTACAR: PREMIUM AVTOMOBİL İCARƏSİ</h1>
+      <p>
+        VIP və ekonomik avtomobilləri rahat filtr et, tarix seç, rezervasiya et və
+        sifarişini profilindən canlı izləməyə davam et.
+      </p>
+      <div class="hero__actions">
+        <a class="btn btn-gold" href="cars.html">Maşınlara bax</a>
+        <a class="btn btn-dark" href="reservation.html">İndi bron et</a>
+      </div>
+      <form class="quick-search" id="homeQuickSearch">
+        <div class="field-group">
+          <label for="homeBrand">Marka</label>
+          <input id="homeBrand" type="text" placeholder="BMW, Mercedes, Kia..." />
         </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features-section">
-        <div class="container">
-            <h2 class="section-title">Niyə Uğur RentaCar?</h2>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🚗</div>
-                    <h3>Geniş Seçim</h3>
-                    <p>Ekonom, biznes və VIP klass avtomobillər</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h3>Münasib Qiymətlər</h3>
-                    <p>Günlük, həftəlik və aylıq endirimli qiymətlər</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>Tam Sığorta</h3>
-                    <p>Bütün avtomobillərimiz tam sığortalıdır</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Sürətli Xidmət</h3>
-                    <p>5 dəqiqədə rezervasiya, çatdırılma xidməti</p>
-                </div>
-            </div>
+        <div class="field-group">
+          <label for="homePickup">Tarixdən</label>
+          <input id="homePickup" type="date" />
         </div>
-    </section>
-
-    <!-- VIP Cars Preview -->
-    <section class="vip-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">⭐ VIP Avtomobillər</h2>
-                <a href="cars.html?vip=true" class="btn btn-outline">Hamısına bax →</a>
-            </div>
-            
-            <div id="vip-cars-grid" class="cars-grid">
-                <div class="loading-spinner">
-                    <div class="spinner-large"></div>
-                    <p>VIP maşınlar yüklənir...</p>
-                </div>
-            </div>
+        <div class="field-group">
+          <label for="homeDropoff">Tarixə</label>
+          <input id="homeDropoff" type="date" />
         </div>
-    </section>
+        <button class="btn btn-primary" type="submit">Axtar</button>
+      </form>
+    </div>
+    <div class="hero__visual">
+      <div class="hero-car-card glass-panel">
+        <img src="foto/fon-foto.png" alt="Premium rent a car banner" />
+      </div>
+    </div>
+  </section>
 
-    <!-- How It Works -->
-    <section class="how-it-works">
-        <div class="container">
-            <h2 class="section-title">Necə işləyir?</h2>
-            
-            <div class="steps-grid">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h3>Maşın seçin</h3>
-                    <p>Geniş kataloqumuzdan özünüzə uyğun avtomobil seçin</p>
-                </div>
-                
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h3>Rezervasiya edin</h3>
-                    <p>Tarixləri seçin və onlayn rezervasiya yaradın</p>
-                </div>
-                
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h3>Sənədləri təqdim edin</h3>
-                    <p>Şəxsiyyət və sürücülük vəsiqənizi yükləyin</p>
-                </div>
-                
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <h3>Avtomobilinizi götürün</h3>
-                    <p>Təsdiqdən sonra avtomobilinizi götürün və yola düşün</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section class="section">
+    <div class="section__header">
+      <div>
+        <span class="eyebrow">Xüsusi seçimlər</span>
+        <h2>Populyar və VIP avtomobillər</h2>
+      </div>
+      <a class="btn btn-outline" href="cars.html">Hamısını gör</a>
+    </div>
+    <div class="car-grid" id="featuredCars"></div>
+  </section>
 
-    <!-- Contact Section -->
-    <section class="contact-section">
-        <div class="container">
-            <div class="contact-grid">
-                <div class="contact-info-box">
-                    <h2>Əlaqə</h2>
-                    <p class="contact-description">
-                        Suallarınız var? Bizimlə əlaqə saxlayın!
-                    </p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <span class="contact-icon">📞</span>
-                            <div>
-                                <h4>Telefon</h4>
-                                <a href="tel:+994519500002">+994 51 950 00 02</a>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <span class="contact-icon">💬</span>
-                            <div>
-                                <h4>WhatsApp</h4>
-                                <a href="https://wa.me/994519500002" target="_blank">+994 51 950 00 02</a>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <span class="contact-icon">📍</span>
-                            <div>
-                                <h4>Ünvan</h4>
-                                <a href="https://maps.app.goo.gl/ncDgHheJCgAjBTuU6" target="_blank">
-                                    Xəritədə bax
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <span class="contact-icon">🕐</span>
-                            <div>
-                                <h4>İş saatları</h4>
-                                <p>Hər gün: 09:00 - 21:00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-map">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1000!2d47.125861!3d40.372494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDDCsDIyJzIxLjAiTiA0N8KwMDcnMzMuMSJF!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0; border-radius: 12px; min-height: 400px;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section class="section two-col-grid">
+    <article class="glass-panel info-card">
+      <span class="eyebrow">Niyə biz?</span>
+      <h2>Etibar, görünüş və rahatlıq bir arada</h2>
+      <ul class="feature-list">
+        <li>Telefon ilə OTP giriş və profil idarəetməsi</li>
+        <li>Tarix toqquşmasına nəzarətli rezervasiya sistemi</li>
+        <li>VIP maşınlar üçün qızılı status və premium görünüş</li>
+        <li>Admin təsdiqli ödəniş sübutu və müqavilə sistemi</li>
+      </ul>
+    </article>
+    <article class="glass-panel info-card">
+      <span class="eyebrow">Əlaqə</span>
+      <h2>2 ünvan, 3 telefon nömrəsi, sürətli WhatsApp dəstəyi</h2>
+      <div class="contact-stack">
+        <a href="tel:+994519500002">+994 51 950 00 02</a>
+        <a href="tel:+994503092626">+994 50 309 26 26</a>
+        <a href="tel:+994103092626">+994 10 309 26 26</a>
+        <a href="contact.html" class="btn btn-gold">Əlaqə səhifəsi</a>
+      </div>
+    </article>
+  </section>
+</main>
 
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>UĞUR RENTACAR</h3>
-                    <p>Premium avtomobil kirayə xidməti</p>
-                    <p class="footer-slogan">"Sizin yolunuz, bizim fəxrımız"</p>
-                </div>
-                
-                <div class="footer-links">
-                    <h4>Sürətli keçidlər</h4>
-                    <ul>
-                        <li><a href="cars.html">Maşın kataloqu</a></li>
-                        <li><a href="login.html">Giriş</a></li>
-                        <li><a href="https://wa.me/994519500002" target="_blank">WhatsApp</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-contact">
-                    <h4>Əlaqə</h4>
-                    <p>Tel: <a href="tel:+994519500002">+994 51 950 00 02</a></p>
-                    <p><a href="https://maps.app.goo.gl/ncDgHheJCgAjBTuU6" target="_blank">Ünvanımız</a></p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 Uğur RentaCar. Bütün hüquqlar qorunur.</p>
-                <p class="developer">Senior Full Stack Developer: Qərib Səfərli</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="assets/js/supabase.js"></script>
-    <script>
-        // VIP maşınları yüklə
-        async function loadVipCars() {
-            try {
-                const { data: cars, error } = await supabaseClient
-                    .from('cars')
-                    .select(`
-                        *,
-                        car_images (image_url, is_main)
-                    `)
-                    .eq('is_active', true)
-                    .eq('is_vip', true)
-                    .limit(4);
-                
-                if (error) throw error;
-                
-                const container = document.getElementById('vip-cars-grid');
-                
-                if (!cars || cars.length === 0) {
-                    container.innerHTML = '<p class="no-data">Hazırda VIP maşın yoxdur</p>';
-                    return;
-                }
-                
-                let html = '';
-                cars.forEach(car => {
-                    const mainImage = car.car_images?.find(img => img.is_main)?.image_url 
-                        || car.car_images?.[0]?.image_url 
-                        || 'assets/img/car-placeholder.jpg';
-                    
-                    html += `
-                        <article class="car-card">
-                            <div class="car-image">
-                                <img src="${mainImage}" alt="${car.brand} ${car.model}" loading="lazy">
-                                <span class="vip-badge">⭐ VIP</span>
-                            </div>
-                            <div class="car-info">
-                                <h3 class="car-title">${car.brand} ${car.model}</h3>
-                                <p class="car-meta">${car.year} • ${car.transmission}</p>
-                                <div class="car-footer">
-                                    <div class="car-price">
-                                        <span class="price-value">${car.daily_price} ₼</span>
-                                        <span class="price-period">/gün</span>
-                                    </div>
-                                    <a href="car-details.html?id=${car.id}" class="btn btn-primary">Ətraflı</a>
-                                </div>
-                            </div>
-                        </article>
-                    `;
-                });
-                
-                container.innerHTML = html;
-                
-            } catch (error) {
-                console.error('VIP maşın yükləmə xətası:', error);
-            }
-        }
-        
-        document.addEventListener('DOMContentLoaded', loadVipCars);
-    </script>
-    
-    <!-- Hero üçün əlavə CSS -->
-    <style>
-        .hero {
-            position: relative;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            color: white;
-            text-align: center;
-        }
-        
-        .hero-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 4rem;
-        }
-        
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            flex-wrap: wrap;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-item .stat-number {
-            display: block;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-        
-        .stat-item .stat-label {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-        
-        /* Features */
-        .features-section {
-            padding: 5rem 0;
-            background: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.25rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: var(--gray-900);
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .feature-card {
-            text-align: center;
-            padding: 2rem;
-            border-radius: 1rem;
-            background: var(--gray-50);
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .feature-card p {
-            color: var(--gray-600);
-        }
-        
-        /* VIP Section */
-        .vip-section {
-            padding: 5rem 0;
-            background: var(--gray-50);
-        }
-        
-        .vip-section .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-        
-        /* How it works */
-        .how-it-works {
-            padding: 5rem 0;
-            background: white;
-        }
-        
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .step-card {
-            text-align: center;
-            position: relative;
-        }
-        
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0 auto 1rem;
-        }
-        
-        .step-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        /* Contact */
-        .contact-section {
-            padding: 5rem 0;
-            background: var(--gray-50);
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: stretch;
-        }
-        
-        .contact-info-box {
-            background: white;
-            padding: 3rem;
-            border-radius: 1rem;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .contact-info-box h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .contact-description {
-            color: var(--gray-600);
-            margin-bottom: 2rem;
-        }
-        
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-        
-        .contact-icon {
-            font-size: 1.5rem;
-            width: 40px;
-            height: 40px;
-            background: var(--primary-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .contact-item h4 {
-            font-size: 0.875rem;
-            color: var(--gray-500);
-            margin-bottom: 0.25rem;
-        }
-        
-        .contact-item a {
-            color: var(--primary);
-            font-weight: 500;
-        }
-        
-        .contact-map {
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        @media (max-width: 768px) {
-            .hero-stats {
-                gap: 2rem;
-            }
-            
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-map {
-                min-height: 300px;
-            }
-        }
-    </style>
-</body>
-</html>
+        <div id="app-footer"></div>
+        <button class="floating-whatsapp" id="floatingWhatsapp" aria-label="WhatsApp ilə əlaqə">
+          <span>WhatsApp</span>
+        </button>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <script src="assets/js/supabase-config.js" defer></script>
+      <script src="assets/js/supabase-client.js" defer></script>
+      <script src="assets/js/utils.js" defer></script>
+      <script src="assets/js/ui.js" defer></script>
+      <script src="assets/js/guards.js" defer></script>
+      <script src="assets/js/app.js" defer></script>
+      <script src="assets/js/cars.js" defer></script>
+    </body>
+    </html>

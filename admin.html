@@ -1,0 +1,83 @@
+    <!DOCTYPE html>
+    <html lang="az">
+    <head>
+      <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="theme-color" content="#07111f" />
+  <link rel="icon" type="image/png" href="foto/favicon.png" />
+  <link rel="manifest" href="assets/seo/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/utilities.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="assets/css/admin.css" />
+      <title>Admin panel | Uğur RentaCar</title>
+      <meta name="description" content="İstifadəçilər, maşınlar, rezervasiyalar və rəylərin idarə paneli." />
+      <meta name="robots" content="index, follow" />
+      <meta property="og:title" content="Admin panel | Uğur RentaCar" />
+      <meta property="og:description" content="İstifadəçilər, maşınlar, rezervasiyalar və rəylərin idarə paneli." />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="foto/fon-foto.png" />
+      <meta property="og:locale" content="az_AZ" />
+      <meta name="twitter:card" content="summary_large_image" />
+
+    </head>
+    <body class="page-admin">
+      <div class="site-shell">
+        <div id="app-header"></div>
+        <main class="page-main admin-main">
+  <section class="admin-layout">
+    <aside class="glass-panel admin-sidebar">
+      <h2>Admin Panel</h2>
+      <nav class="admin-nav">
+        <button class="admin-tab is-active" data-tab="dashboard">Dashboard</button>
+        <button class="admin-tab" data-tab="users">İstifadəçilər</button>
+        <button class="admin-tab" data-tab="cars">Maşınlar</button>
+        <button class="admin-tab" data-tab="reservations">Rezervasiyalar</button>
+        <button class="admin-tab" data-tab="reviews">Rəylər</button>
+      </nav>
+      <button class="btn btn-outline" id="logoutAdminBtn" type="button">Çıxış et</button>
+    </aside>
+    <section class="admin-content">
+      <div class="glass-panel admin-panel is-visible" id="tab-dashboard">
+        <h1>Dashboard</h1>
+        <div class="stats-grid" id="adminStats"></div>
+      </div>
+      <div class="glass-panel admin-panel" id="tab-users">
+        <div class="panel-head"><h2>Userlər</h2><input id="adminUserSearch" placeholder="Ad, telefon, email..." /></div>
+        <div id="adminUsersTable" class="table-shell"></div>
+      </div>
+      <div class="glass-panel admin-panel" id="tab-cars">
+        <div class="panel-head"><h2>Maşınlar</h2><button class="btn btn-gold" id="adminRefreshCars" type="button">Yenilə</button></div>
+        <div id="adminCarsTable" class="table-shell"></div>
+      </div>
+      <div class="glass-panel admin-panel" id="tab-reservations">
+        <div class="panel-head"><h2>Rezervasiyalar</h2><button class="btn btn-primary" id="adminRefreshReservations" type="button">Yenilə</button></div>
+        <div id="adminReservationsTable" class="table-shell"></div>
+      </div>
+      <div class="glass-panel admin-panel" id="tab-reviews">
+        <div class="panel-head"><h2>Rəylər</h2></div>
+        <div id="adminReviewsTable" class="table-shell"></div>
+      </div>
+    </section>
+  </section>
+</main>
+
+        <div id="app-footer"></div>
+        <button class="floating-whatsapp" id="floatingWhatsapp" aria-label="WhatsApp ilə əlaqə">
+          <span>WhatsApp</span>
+        </button>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <script src="assets/js/supabase-config.js" defer></script>
+      <script src="assets/js/supabase-client.js" defer></script>
+      <script src="assets/js/utils.js" defer></script>
+      <script src="assets/js/ui.js" defer></script>
+      <script src="assets/js/guards.js" defer></script>
+      <script src="assets/js/app.js" defer></script>
+      <script src="assets/js/admin.js" defer></script>
+    </body>
+    </html>

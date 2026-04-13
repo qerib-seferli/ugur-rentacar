@@ -1,0 +1,93 @@
+    <!DOCTYPE html>
+    <html lang="az">
+    <head>
+      <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="theme-color" content="#07111f" />
+  <link rel="icon" type="image/png" href="foto/favicon.png" />
+  <link rel="manifest" href="assets/seo/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/utilities.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="assets/css/reservation.css" />
+      <title>Rezervasiya | Uğur RentaCar</title>
+      <meta name="description" content="Tarix seç, qiyməti gör, ödəniş sübutunu yüklə və rezervasiyanı başlat." />
+      <meta name="robots" content="index, follow" />
+      <meta property="og:title" content="Rezervasiya | Uğur RentaCar" />
+      <meta property="og:description" content="Tarix seç, qiyməti gör, ödəniş sübutunu yüklə və rezervasiyanı başlat." />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="foto/fon-foto.png" />
+      <meta property="og:locale" content="az_AZ" />
+      <meta name="twitter:card" content="summary_large_image" />
+
+    </head>
+    <body class="page-reservation">
+      <div class="site-shell">
+        <div id="app-header"></div>
+        <main class="page-main">
+  <section class="section compact-top">
+    <div class="reservation-layout">
+      <form class="glass-panel reservation-form" id="reservationForm">
+        <div class="section__header left">
+          <div>
+            <span class="eyebrow">Booking Form</span>
+            <h1>Rezervasiya yaradın</h1>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="field-group"><label>Ad Soyad</label><input id="resFullName" required /></div>
+          <div class="field-group"><label>Telefon</label><input id="resPhone" required /></div>
+          <div class="field-group"><label>Email</label><input id="resEmail" type="email" /></div>
+          <div class="field-group"><label>WhatsApp</label><input id="resWhatsapp" /></div>
+          <div class="field-group"><label>FIN</label><input id="resFin" maxlength="7" /></div>
+          <div class="field-group"><label>Maşın</label><select id="resCarId"></select></div>
+          <div class="field-group"><label>Tarixdən</label><input id="resStartDate" type="date" required /></div>
+          <div class="field-group"><label>Tarixə</label><input id="resEndDate" type="date" required /></div>
+          <div class="field-group"><label>Şəhər / Ünvan</label><input id="resAddress" /></div>
+          <div class="field-group full"><label>Əlavə qeyd</label><textarea id="resNote" rows="4"></textarea></div>
+        </div>
+        <div class="hero__actions">
+          <button class="btn btn-primary" type="button" id="checkAvailabilityBtn">Tarixi yoxla</button>
+          <button class="btn btn-gold" type="submit">Rezervasiya yarat</button>
+        </div>
+      </form>
+
+      <aside class="glass-panel reservation-summary">
+        <h3>Sifariş xülasəsi</h3>
+        <div class="summary-list">
+          <div><span>Status</span><strong id="reservationStatusBox">Yeni</strong></div>
+          <div><span>Gün sayı</span><strong id="reservationDays">0 gün</strong></div>
+          <div><span>Təxmini məbləğ</span><strong id="reservationAmount">0 AZN</strong></div>
+          <div><span>Depozit</span><strong id="reservationDeposit">0 AZN</strong></div>
+        </div>
+        <div class="upload-box">
+          <label for="receiptFile">Çek şəkli yüklə</label>
+          <input id="receiptFile" type="file" accept="image/*,.pdf" />
+          <button class="btn btn-dark" type="button" id="uploadReceiptBtn">Çeki yüklə</button>
+          <small>Çek public açıq olmayacaq, admin təsdiq üçün baxacaq.</small>
+        </div>
+        <div id="reservationMessage" class="inline-message"></div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+        <div id="app-footer"></div>
+        <button class="floating-whatsapp" id="floatingWhatsapp" aria-label="WhatsApp ilə əlaqə">
+          <span>WhatsApp</span>
+        </button>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <script src="assets/js/supabase-config.js" defer></script>
+      <script src="assets/js/supabase-client.js" defer></script>
+      <script src="assets/js/utils.js" defer></script>
+      <script src="assets/js/ui.js" defer></script>
+      <script src="assets/js/guards.js" defer></script>
+      <script src="assets/js/app.js" defer></script>
+      <script src="assets/js/reservation.js" defer></script>
+    </body>
+    </html>

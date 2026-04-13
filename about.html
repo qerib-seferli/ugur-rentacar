@@ -13,41 +13,42 @@
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="assets/css/utilities.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
-  <link rel="stylesheet" href="assets/css/auth.css" />
-      <title>OTP Giriş | Uğur RentaCar</title>
-      <meta name="description" content="Telefon nömrəsi ilə OTP giriş sistemi." />
+
+      <title>Haqqımızda | Uğur RentaCar</title>
+      <meta name="description" content="Şirkətimiz, xidmət prinsiplərimiz və müştəriyə verdiyimiz dəyər." />
       <meta name="robots" content="index, follow" />
-      <meta property="og:title" content="OTP Giriş | Uğur RentaCar" />
-      <meta property="og:description" content="Telefon nömrəsi ilə OTP giriş sistemi." />
+      <meta property="og:title" content="Haqqımızda | Uğur RentaCar" />
+      <meta property="og:description" content="Şirkətimiz, xidmət prinsiplərimiz və müştəriyə verdiyimiz dəyər." />
       <meta property="og:type" content="website" />
       <meta property="og:image" content="foto/fon-foto.png" />
       <meta property="og:locale" content="az_AZ" />
       <meta name="twitter:card" content="summary_large_image" />
 
     </head>
-    <body class="page-auth">
+    <body class="page-static">
       <div class="site-shell">
         <div id="app-header"></div>
-        <main class="page-main auth-main">
-  <section class="auth-card glass-panel">
-    <img class="auth-logo" src="foto/logo.png" alt="Uğur RentaCar logo" />
-    <div class="eyebrow">User OTP Login</div>
-    <h1>Telefon ilə giriş</h1>
-    <form id="otpRequestForm" class="stack-md">
-      <div class="field-group">
-        <label for="otpPhone">Telefon nömrəsi</label>
-        <input id="otpPhone" type="tel" placeholder="+994501234567" required />
+        <main class="page-main">
+  <section class="section compact-top">
+    <div class="glass-panel prose-panel">
+      <span class="eyebrow">Haqqımızda</span>
+      <h1>Uğur RentaCar haqqında</h1>
+      <p>
+        Uğur RentaCar müasir, şəffaf və etibarlı avtomobil icarəsi xidməti təqdim edir.
+        Məqsədimiz yalnız maşın vermək deyil, həm də rahat rezervasiya, sürətli əlaqə,
+        aydın status izləmə və professional dəstək təqdim etməkdir.
+      </p>
+      <div class="two-col-grid">
+        <div class="glass-tile">
+          <h3>Missiyamız</h3>
+          <p>Müştəriyə təhlükəsiz, rahat və premium icarə təcrübəsi yaşatmaq.</p>
+        </div>
+        <div class="glass-tile">
+          <h3>Nəticə odaklı sistem</h3>
+          <p>Profil, rezervasiya, müqavilə, admin yoxlaması və WhatsApp dəstəyi bir aradadır.</p>
+        </div>
       </div>
-      <button class="btn btn-gold" type="submit">OTP göndər</button>
-    </form>
-    <form id="otpVerifyForm" class="stack-md">
-      <div class="field-group">
-        <label for="otpCode">OTP kodu</label>
-        <input id="otpCode" type="text" placeholder="123456" required />
-      </div>
-      <button class="btn btn-primary" type="submit">Daxil ol</button>
-    </form>
-    <div id="otpMessage" class="inline-message"></div>
+    </div>
   </section>
 </main>
 
@@ -63,6 +64,6 @@
       <script src="assets/js/ui.js" defer></script>
       <script src="assets/js/guards.js" defer></script>
       <script src="assets/js/app.js" defer></script>
-      <script src="assets/js/auth-user.js" defer></script>
+
     </body>
     </html>

@@ -1,0 +1,86 @@
+    <!DOCTYPE html>
+    <html lang="az">
+    <head>
+      <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="theme-color" content="#07111f" />
+  <link rel="icon" type="image/png" href="foto/favicon.png" />
+  <link rel="manifest" href="assets/seo/site.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/utilities.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="assets/css/profile.css" />
+      <title>Profil | Uğur RentaCar</title>
+      <meta name="description" content="İstifadəçi profil məlumatları, sənədlər və hesab ayarları." />
+      <meta name="robots" content="index, follow" />
+      <meta property="og:title" content="Profil | Uğur RentaCar" />
+      <meta property="og:description" content="İstifadəçi profil məlumatları, sənədlər və hesab ayarları." />
+      <meta property="og:type" content="website" />
+      <meta property="og:image" content="foto/fon-foto.png" />
+      <meta property="og:locale" content="az_AZ" />
+      <meta name="twitter:card" content="summary_large_image" />
+
+    </head>
+    <body class="page-profile">
+      <div class="site-shell">
+        <div id="app-header"></div>
+        <main class="page-main">
+  <section class="section compact-top">
+    <div class="profile-layout">
+      <aside class="glass-panel profile-side">
+        <div class="avatar-box">
+          <img id="profileAvatarPreview" src="foto/placeholder-user.webp" alt="Profil şəkli" />
+        </div>
+        <input type="file" id="profileAvatarInput" accept="image/*" />
+        <button class="btn btn-dark" type="button" id="uploadAvatarBtn">Şəkli yüklə</button>
+        <ul class="side-list">
+          <li><a href="my-reservations.html">Aktiv rezervlər</a></li>
+          <li><a href="reservation-history.html">Keçmiş rezervlər</a></li>
+          <li><a href="favorites.html">Sevimlilər</a></li>
+        </ul>
+      </aside>
+      <form class="glass-panel profile-form" id="profileForm">
+        <div class="section__header left">
+          <div>
+            <span class="eyebrow">İstifadəçi Profili</span>
+            <h1>Profil məlumatları</h1>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="field-group"><label>Ad</label><input id="profileFirstName" /></div>
+          <div class="field-group"><label>Soyad</label><input id="profileLastName" /></div>
+          <div class="field-group"><label>Telefon</label><input id="profilePhone" readonly /></div>
+          <div class="field-group"><label>Email</label><input id="profileEmail" type="email" /></div>
+          <div class="field-group"><label>Şəhər</label><input id="profileCity" /></div>
+          <div class="field-group"><label>Ünvan</label><input id="profileAddress" /></div>
+          <div class="field-group full"><label>Özünüz haqqında</label><textarea id="profileBio" rows="4"></textarea></div>
+        </div>
+        <div class="hero__actions">
+          <button class="btn btn-gold" type="submit">Məlumatları yadda saxla</button>
+          <button class="btn btn-outline" id="logoutUserBtn" type="button">Çıxış et</button>
+        </div>
+        <div id="profileMessage" class="inline-message"></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+        <div id="app-footer"></div>
+        <button class="floating-whatsapp" id="floatingWhatsapp" aria-label="WhatsApp ilə əlaqə">
+          <span>WhatsApp</span>
+        </button>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <script src="assets/js/supabase-config.js" defer></script>
+      <script src="assets/js/supabase-client.js" defer></script>
+      <script src="assets/js/utils.js" defer></script>
+      <script src="assets/js/ui.js" defer></script>
+      <script src="assets/js/guards.js" defer></script>
+      <script src="assets/js/app.js" defer></script>
+      <script src="assets/js/profile.js" defer></script>
+    </body>
+    </html>
