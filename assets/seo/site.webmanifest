@@ -1,11 +1,17 @@
 {
   "name": "Uğur RentaCar",
   "short_name": "UğurRC",
-  "start_url": "./index.html",
+  "start_url": "../../index.html",
+  "scope": "../../",
   "display": "standalone",
   "background_color": "#040913",
   "theme_color": "#07111f",
   "icons": [
+    {
+      "src": "../../foto/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
     {
       "src": "../../foto/favicon.png",
       "sizes": "512x512",
