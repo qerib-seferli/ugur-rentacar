@@ -1,99 +1,145 @@
-    <!DOCTYPE html>
-    <html lang="az">
-    <head>
-      <meta charset="UTF-8" />
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="theme-color" content="#07111f" />
+
+  <title>Maşınlar | Uğur RentaCar</title>
+  <meta name="description" content="Uğur RentaCar maşın kataloqu. Premium avtomobillər, VIP seçimlər, tarixə görə axtarış və rahat filter sistemi." />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Maşınlar | Uğur RentaCar" />
+  <meta property="og:description" content="Uğur RentaCar maşın kataloqu, premium seçimlər və rahat bron sistemi." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="foto/fon-foto.png" />
+  <meta property="og:locale" content="az_AZ" />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <link rel="icon" type="image/png" href="foto/favicon.png" />
   <link rel="manifest" href="assets/seo/site.webmanifest" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="assets/css/utilities.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
   <link rel="stylesheet" href="assets/css/cars.css" />
-      <title>Maşınlar | Uğur RentaCar</title>
-      <meta name="description" content="Rent a car kataloqu, axtarış və premium filter sistemi." />
-      <meta name="robots" content="index, follow" />
-      <meta property="og:title" content="Maşınlar | Uğur RentaCar" />
-      <meta property="og:description" content="Rent a car kataloqu, axtarış və premium filter sistemi." />
-      <meta property="og:type" content="website" />
-      <meta property="og:image" content="foto/fon-foto.png" />
-      <meta property="og:locale" content="az_AZ" />
-      <meta name="twitter:card" content="summary_large_image" />
+</head>
+<body class="page-cars">
+  <div class="site-shell">
+    <div id="app-header"></div>
 
-    </head>
-    <body class="page-cars">
-      <div class="site-shell">
-        <div id="app-header"></div>
-        <main class="page-main">
-  <section class="section compact-top">
-    <div class="section__header">
-      <div>
-        <span class="eyebrow">Kataloq</span>
-        <h1>Maşın Siyahısı</h1>
-      </div>
-    </div>
-    <div class="catalog-layout">
-      <aside class="glass-panel filter-panel">
-        <h3>Filterlər</h3>
-        <form id="catalogFilterForm" class="stack-md">
-          <div class="field-group">
-            <label>Marka</label>
-            <input type="text" id="filterBrand" placeholder="Marka axtar..." />
-          </div>
-          <div class="field-group">
-            <label>Model</label>
-            <input type="text" id="filterModel" placeholder="Model axtar..." />
-          </div>
-          <div class="field-group">
-            <label>Qiymətə qədər</label>
-            <input type="number" id="filterMaxPrice" placeholder="AZN" />
-          </div>
-          <div class="field-group">
-            <label>Tarixdən</label>
-            <input type="date" id="filterStartDate" />
-          </div>
-          <div class="field-group">
-            <label>Tarixə</label>
-            <input type="date" id="filterEndDate" />
-          </div>
-          <label class="check-row">
-            <input type="checkbox" id="filterVip" />
-            <span>Yalnız VIP</span>
-          </label>
-          <button class="btn btn-primary" type="submit">Tətbiq et</button>
-        </form>
-      </aside>
-      <section class="catalog-content">
-        <div class="catalog-topbar glass-panel">
-          <div class="results-meta">
-            <strong id="catalogCount">0</strong> maşın tapıldı
-          </div>
-          <div class="search-inline">
-            <input type="search" id="catalogSearch" placeholder="Tam axtarış..." />
+    <main class="page-main">
+      <section class="section compact-top">
+        <div class="section__header">
+          <div>
+            <span class="eyebrow">Kataloq</span>
+            <h1>Maşın Siyahısı</h1>
+            <p class="section-subtitle">
+              Tarix, marka, model və qiymətə görə uyğun maşını seçin.
+            </p>
           </div>
         </div>
-        <div class="car-grid" id="carsGrid"></div>
-      </section>
-    </div>
-  </section>
-</main>
 
-        <div id="app-footer"></div>
-        <button class="floating-whatsapp" id="floatingWhatsapp" aria-label="WhatsApp ilə əlaqə">
-          <span>WhatsApp</span>
-        </button>
-      </div>
-      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-      <script src="assets/js/supabase-config.js" defer></script>
-      <script src="assets/js/supabase-client.js" defer></script>
-      <script src="assets/js/utils.js" defer></script>
-      <script src="assets/js/ui.js" defer></script>
-      <script src="assets/js/guards.js" defer></script>
-      <script src="assets/js/app.js" defer></script>
-      <script src="assets/js/cars.js" defer></script>
-    </body>
-    </html>
+        <div class="catalog-layout">
+          <aside class="glass-panel filter-panel">
+            <h2 class="panel-title">Filterlər</h2>
+
+            <form id="catalogFilterForm" class="stack-md" novalidate>
+              <div class="field-group">
+                <label for="filterBrand">Marka</label>
+                <input type="text" id="filterBrand" placeholder="Məs: Mercedes, BMW..." />
+              </div>
+
+              <div class="field-group">
+                <label for="filterModel">Model</label>
+                <input type="text" id="filterModel" placeholder="Məs: E-Class, Camry..." />
+              </div>
+
+              <div class="field-group">
+                <label for="filterMaxPrice">Günlük qiymətə qədər</label>
+                <input type="number" id="filterMaxPrice" placeholder="AZN" min="0" />
+              </div>
+
+              <div class="field-group">
+                <label for="filterTransmission">Sürətlər qutusu</label>
+                <select id="filterTransmission">
+                  <option value="">Hamısı</option>
+                  <option value="automatic">Avtomat</option>
+                  <option value="manual">Mexanika</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="filterFuelType">Yanacaq növü</label>
+                <select id="filterFuelType">
+                  <option value="">Hamısı</option>
+                  <option value="petrol">Benzin</option>
+                  <option value="diesel">Dizel</option>
+                  <option value="hybrid">Hibrid</option>
+                  <option value="electric">Elektrik</option>
+                </select>
+              </div>
+
+              <div class="field-group">
+                <label for="filterStartDate">Tarixdən</label>
+                <input type="date" id="filterStartDate" />
+              </div>
+
+              <div class="field-group">
+                <label for="filterEndDate">Tarixə</label>
+                <input type="date" id="filterEndDate" />
+              </div>
+
+              <label class="check-row" for="filterVip">
+                <input type="checkbox" id="filterVip" />
+                <span>Yalnız VIP maşınlar</span>
+              </label>
+
+              <div class="filter-actions">
+                <button class="btn btn-primary" type="submit">Tətbiq et</button>
+                <button class="btn btn-dark" type="button" id="resetCatalogFilters">Sıfırla</button>
+              </div>
+            </form>
+          </aside>
+
+          <section class="catalog-content">
+            <div class="catalog-topbar glass-panel">
+              <div class="results-meta">
+                <strong id="catalogCount">0</strong> maşın tapıldı
+              </div>
+
+              <div class="search-inline">
+                <label class="sr-only" for="catalogSearch">Tam axtarış</label>
+                <input type="search" id="catalogSearch" placeholder="Marka, model, ban növü..." />
+              </div>
+            </div>
+
+            <div class="catalog-feedback" id="catalogFeedback"></div>
+
+            <div class="car-grid" id="carsGrid" aria-live="polite"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <div id="app-footer"></div>
+
+    <button class="floating-whatsapp" id="floatingWhatsapp" aria-label="WhatsApp ilə əlaqə">
+      <span>WhatsApp</span>
+    </button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-config.js" defer></script>
+  <script src="assets/js/supabase-client.js" defer></script>
+  <script src="assets/js/utils.js" defer></script>
+  <script src="assets/js/ui.js" defer></script>
+  <script src="assets/js/guards.js" defer></script>
+  <script src="assets/js/app.js" defer></script>
+  <script src="assets/js/cars.js" defer></script>
+</body>
+</html>
